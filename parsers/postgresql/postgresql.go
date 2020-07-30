@@ -57,7 +57,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/Sirupsen/logrus"
+	"github.com/sirupsen/logrus"
 	"github.com/honeycombio/honeytail/event"
 	"github.com/honeycombio/honeytail/parsers"
 	"github.com/honeycombio/mysqltools/query/normalizer"
@@ -285,6 +285,7 @@ func buildPrefixRegexp(prefixFormat string) (*parsers.ExtRegexp, error) {
 	for k, v := range prefixValues {
 		prefixFormat = strings.Replace(prefixFormat, k, v.ReString(), -1)
 	}
+	prefixFormat = "^" + prefixFormat
 
 	re, err := regexp.Compile(prefixFormat)
 	if err != nil {
